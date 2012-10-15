@@ -9,7 +9,13 @@ import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import me.navigation.client.SensorReading;
+import me.navigation.shared.GPSData;
 import me.navigation.shared.TimeReader;
 
 
@@ -17,30 +23,17 @@ public class GPSLoggerReader {
 
 	public static void main(String args[]) throws Exception
 	{
-		File f = new File("/Users/Aditya/Downloads/20121014134105/20121014134105.txt");
-		System.out.println(f.canRead());
-		FileReader read ;
-		FileInputStream fStream = new FileInputStream(f);
-		DataInputStream in = new DataInputStream(fStream);
-		BufferedReader buff = new BufferedReader(new InputStreamReader(in));
 		
-		String line;
-		Date time= new Date();
-		long timeLong;
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		System.out.println(dateFormat.format(time));
-		String timeString ;
-		buff.readLine(); // waste the first line
-		Date firstTime = TimeReader.getTime(buff.readLine());
-		long firstTimeLong = (long)firstTime.getTime()/1000;
-		while((line= buff.readLine())!=null)
-		{
-			time = TimeReader.getTime(line);
-			timeLong = time.getTime()/1000;
-			long diff = (timeLong-firstTimeLong);
-			System.out.println(diff+"");
-		}
-		in.close();
-		
+//		HashMap<Integer,GPSData> h = new HashMap<Integer, GPSData>();
+//		h=SensorReading.getGPSData("/Users/Aditya/Downloads/20121014134105/20121014134105.txt");
+//		Iterator<Entry<Integer, GPSData>> iter = h.entrySet().iterator();
+//		while(iter.hasNext())
+//		{	
+//			Entry<Integer, GPSData> pairs = iter.next();
+//			System.out.println(pairs.getKey()+" "+ " "+pairs.getValue().getTime()+" "+pairs.getValue().getPosition().getLatitude());
+//		}
+//		
+//		System.out.println(h.containsKey(4));
+		System.out.println(SensorReading.getUVData("/Users/Aditya/Documents/Development/uvnavigation/readingsAll_uva1.dat"));
 	}
 }

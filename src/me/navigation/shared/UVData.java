@@ -1,10 +1,13 @@
 package me.navigation.shared;
 
+import java.util.Date;
+
 public class UVData {
 
+	private UVRange uvRange;
 	private LatLong point;
 	private double uvIndex;
-	private TimeSlot time;
+	private Date time;
 	private String streetName;
 	
 	public LatLong getPoint() {
@@ -13,10 +16,10 @@ public class UVData {
 	public void setPoint(LatLong point) {
 		this.point = point;
 	}
-	public TimeSlot getTime() {
+	public Date getTime() {
 		return time;
 	}
-	public void setTime(TimeSlot time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
 	public double getUvIndex() {
@@ -30,6 +33,12 @@ public class UVData {
 	}
 	public void setStreetName(String streetName) {
 		this.streetName = streetName;
+	}
+	public UVRange getUvRange() {
+		return uvRange;
+	}
+	public void setUvRange(UVRange uvRange) {
+		this.uvRange = uvRange;
 	}
 	
 }
