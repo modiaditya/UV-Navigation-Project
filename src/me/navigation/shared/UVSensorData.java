@@ -2,29 +2,44 @@ package me.navigation.shared;
 
 public class UVSensorData {
 	
-	private UVRange uvRange;
-	private double uvIndex;
+
+	private double uva1;
+	private double uva2;
+	private double uvb1;
+	private double uvb2;
 	
-	public static UVRange getUVRange(String filename)
-	{
-		UVRange uvRange;
-		filename  = filename.split("//")[filename.length()-1];
-		filename = filename.substring(filename.indexOf('_'), filename.indexOf('.'));
-		uvRange = UVRange.valueOf(filename);
-		return uvRange;
+
+
+	public double getUva1() {
+		return uva1;
 	}
-	
-	public UVRange getUvRange() {
-		return uvRange;
+
+	public void setUva1(double uva1) {
+		this.uva1 = uva1;
 	}
-	public void setUvRange(UVRange uvRange) {
-		this.uvRange = uvRange;
+
+	public double getUva2() {
+		return uva2;
 	}
-	public double getUvIndex() {
-		return uvIndex;
+
+	public void setUva2(double uva2) {
+		this.uva2 = uva2;
 	}
-	public void setUvIndex(double uvIndex) {
-		this.uvIndex = uvIndex;
+
+	public double getUvb1() {
+		return uvb1;
+	}
+
+	public void setUvb1(double uvb1) {
+		this.uvb1 = uvb1;
+	}
+
+	public double getUvb2() {
+		return uvb2;
+	}
+
+	public void setUvb2(double uvb2) {
+		this.uvb2 = uvb2;
 	}
 
 

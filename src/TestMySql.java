@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import me.navigation.database.DatabaseOperations;
+
 public class TestMySql {
 	
 	static void normalSql(String url, String username, String password)
@@ -88,8 +90,9 @@ public class TestMySql {
         String username = "adityauv";
         String password = "uvnavigation";
         
-       // TestMySql.normalSql(url, username, password);
-        TestMySql.preparedStatementSelect(url, username, password);
+        //TestMySql.preparedStatementSelect(url, username, password);
+        DatabaseOperations db = new DatabaseOperations(url,username, password);
+        db.insertIntoDatabase("/Users/Aditya/Documents/Development/uvnavigation/10-16/outputNew.txt");
 
     }
 }

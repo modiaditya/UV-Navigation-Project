@@ -33,4 +33,9 @@ public class GPSData {
 	public void setTime(Date time) {
 		this.time = time;
 	}
+	
+	public String toString()
+	{
+		return this.getPosition().getLatitude()+" "+this.getPosition().getLatitude()+" "+this.getTime();
+	}
 }

@@ -4,17 +4,14 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
 import me.navigation.shared.GPSData;
 import me.navigation.shared.LatLong;
 import me.navigation.shared.TimeReader;
-import me.navigation.shared.UVData;
+import me.navigation.shared.SensorUVData;
 import me.navigation.shared.UVSensorData;
 
 public class SensorReading {
@@ -57,11 +54,38 @@ public class SensorReading {
 		return h;
 		
 	}
-	public static String getUVData(String filename) throws Exception
+	public static HashMap<Integer, SensorUVData> getUVData(String filename) throws Exception
 	{
-		HashMap<Integer, UVData> h = new HashMap<Integer, UVData>();
+		HashMap<Integer, SensorUVData> h = new HashMap<Integer, SensorUVData>();
+		String uvRange = SensorUVData.getUVRange(filename);
 		
+		SensorUVData data ;
 		
-		return UVSensorData.getUVRange(filename)+"";
+		File f = new File(filename);
+		FileInputStream fStream = new FileInputStream(f);
+		DataInputStream in = new DataInputStream(fStream);
+		BufferedReader buff = new BufferedReader(new InputStreamReader(in));
+		String line;
+		Integer seconds;
+		double uvIndex;
+		String[] lineArr;
+		while((line=buff.readLine())!=null)
+		{ 	data=  new SensorUVData();
+			lineArr = line.split(" ");
+			seconds = (int)Double.parseDouble(lineArr[0]);
+			uvIndex = Double.parseDouble(lineArr[1]);
+			//logic to set uvIndex
+			if(uvRange.equals("uva1"))
+				data.setUva1(uvIndex);
+			else if(uvRange.equals("uva2"))
+				data.setUva2(uvIndex);
+			else if(uvRange.equals("uvb1"))
+				data.setUvb1(uvIndex);
+			else if(uvRange.equals("uvb2"))
+				data.setUvb2(uvIndex);
+			h.put(seconds, data);
+		}
+		
+		return h;
 	}
 }
