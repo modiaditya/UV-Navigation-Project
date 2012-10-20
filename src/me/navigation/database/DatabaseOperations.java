@@ -72,8 +72,8 @@ public class DatabaseOperations {
 			
 			//prep.setString(1,"testStreet");
 			prep.setString(1, currentTime);
-			prep.setFloat(2, new Float(lineArr[1]));
-			prep.setFloat(3, new Float(lineArr[2]));
+			prep.setString(2, lineArr[1]);
+			prep.setString(3, lineArr[2]);
 			prep.setFloat(4, new Float(lineArr[3]));
 			prep.setFloat(5, new Float(lineArr[4]));
 			prep.setFloat(6, new Float(lineArr[5]));
