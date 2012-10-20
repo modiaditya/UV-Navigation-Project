@@ -2,6 +2,12 @@ package me.navigation.shared;
 
 import java.util.Date;
 
+
+/**
+ * @author Aditya
+ * This class is used to insert the exact UV data.
+ * It contains all the necessary information !
+ */
 public class UVData {
 
 	private double uva1=-1;

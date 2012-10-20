@@ -11,6 +11,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 
+/**
+ * @author Aditya
+ * TEMP class used to test the parsers
+ */
 public class ParserFirstTry {
 
 	public static String parse(String jsonLine) {

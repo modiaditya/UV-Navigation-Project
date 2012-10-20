@@ -12,6 +12,11 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 
+/**
+ * @author Aditya
+ * This Class is used to format the UV data which is retuned by UCB univeristy
+ * The dataset hence produced will be used to create the curve
+ */
 public class FormatUVData {
 
 	long timeStamp;

@@ -1,5 +1,11 @@
 package me.navigation.shared;
 
+
+/**
+ * @author Aditya
+ * This class is used to capture the UV Sensor readings
+ *
+ */
 public class SensorUVData {
 
 	private double uva1;

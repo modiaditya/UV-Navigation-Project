@@ -9,6 +9,11 @@ import java.util.logging.Logger;
 
 import me.navigation.database.DatabaseOperations;
 
+
+/**
+ * @author Aditya
+ * TEMP Class to just test the SQL 
+ */
 public class TestMySql {
 	
 	static void normalSql(String url, String username, String password)
