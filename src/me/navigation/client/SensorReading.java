@@ -8,11 +8,10 @@ import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.HashMap;
 
+import me.navigation.server.TimeReader;
 import me.navigation.shared.GPSData;
 import me.navigation.shared.LatLong;
-import me.navigation.shared.TimeReader;
 import me.navigation.shared.SensorUVData;
-import me.navigation.shared.UVSensorData;
 
 public class SensorReading {
 

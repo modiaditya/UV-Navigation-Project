@@ -1,4 +1,4 @@
-import me.navigation.shared.BoundingBox;
+import me.navigation.server.BoundingBox;
 import me.navigation.shared.LatLong;
 
 
