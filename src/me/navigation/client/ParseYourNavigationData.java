@@ -9,6 +9,12 @@ import com.google.gson.JsonParser;
 
 import me.navigation.server.HttpSender;
 
+
+/**
+ * @author Aditya
+ * Sample class to parse YourNavigationData.
+ * Just a proof of concept
+ */
 public class ParseYourNavigationData {
 	
 	public static String getNoOfSegments(String url, String parameters) throws Exception

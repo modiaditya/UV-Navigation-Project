@@ -10,6 +10,12 @@ import com.google.gson.JsonParser;
 import me.navigation.server.HttpSender;
 import me.navigation.shared.LatLong;
 
+
+/**
+ * @author Aditya
+ * just a test class to check google api parsing
+ * 
+ */
 public class ParseGoogleGeocoding {
 
 	public static String getStreetName(LatLong point) throws Exception
