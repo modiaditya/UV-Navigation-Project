@@ -13,6 +13,10 @@ public class LatLong {
 			this.longitude = longitude;
 		}
 
+		public String toString()
+		{
+			return latitude+","+longitude;
+		}
 		public Double getLatitude() {
 			return this.latitude;
 		}

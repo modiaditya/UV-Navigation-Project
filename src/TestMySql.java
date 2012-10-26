@@ -97,7 +97,7 @@ public class TestMySql {
         
         //TestMySql.preparedStatementSelect(url, username, password);
         DatabaseOperations db = new DatabaseOperations(url,username, password);
-        db.insertIntoDatabase("/Users/Aditya/Documents/Development/uvnavigation/10-16/outputNew.txt");
+        db.insertIntoDatabase("/Users/Aditya/Documents/Development/uvnavigation/10-23/outputNew.txt");
 
     }
 }

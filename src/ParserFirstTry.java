@@ -1,7 +1,7 @@
 import java.net.SocketTimeoutException;
 
-import me.navigation.client.ParseGoogleGeocoding;
 import me.navigation.client.ParseYourNavigationData;
+import me.navigation.server.API_Parser;
 import me.navigation.server.HttpSender;
 import me.navigation.shared.LatLong;
 
@@ -53,7 +53,7 @@ public class ParserFirstTry {
 				System.out.println(ParserFirstTry.parseGoogleMapsJson(HttpSender.sendGetRequest(endpoint, parameters)));
 			
 				LatLong point = new LatLong(34.065918, -118.451802);
-				System.out.println(ParseGoogleGeocoding.getStreetName(point));
+				System.out.println(API_Parser.getStreetName(point));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println(e.getMessage());
@@ -62,15 +62,17 @@ public class ParserFirstTry {
 		
 		if(testingYourNavigation)
 		{
+			LatLong source = new LatLong(Double.parseDouble(args[0]), Double.parseDouble(args[1]));
+			LatLong destination = new LatLong(Double.parseDouble(args[2]), Double.parseDouble(args[3]));
 			String endpoint = "http://www.yournavigation.org/api/1.0/gosmore.php";
-			String parameters = "format=geojson&flat=34.066420&flon=-118.452630&tlat=34.062870&tlon=-118.448340&v=foot";
+			String parameters = "format=geojson&flat="+source.getLatitude()+"&flon="+source.getLongitude()+"&tlat="+destination.getLatitude()+"&tlon="+destination.getLongitude()+"&v=foot";
 			
 			try
 			{
-				System.out.println(ParseYourNavigationData.getNoOfSegments(endpoint, parameters));
+				System.out.println(ParseYourNavigationData.getAllCoOrdinations(endpoint, parameters));
 				
 			}catch(Exception e){
-				
+				System.out.println(e.getMessage());
 			}
 			
 		}

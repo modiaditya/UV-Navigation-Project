@@ -17,6 +17,22 @@ import me.navigation.server.HttpSender;
  */
 public class ParseYourNavigationData {
 	
+	public static String getAllCoOrdinations(String url, String parameters) throws Exception
+	{
+		String jsonLine = HttpSender.sendGetRequest(url, parameters);
+		
+		JsonElement jElement = new JsonParser().parse(jsonLine);
+		JsonObject jObject = jElement.getAsJsonObject();
+		JsonArray jArray = jObject.getAsJsonArray("coordinates");
+		String rr = "";
+		for(int i=0;i<jArray.size();i++)
+		{
+			rr = rr + jArray.get(i).toString().replace('[', ' ');
+			rr=rr.replace(']', '\n');
+			
+		}
+		return rr;
+	}
 	public static String getNoOfSegments(String url, String parameters) throws Exception
 	{
 		int noOfSegments;
