@@ -17,6 +17,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import me.navigation.server.BoundingBox;
+import me.navigation.shared.LatLong;
+
 
 public class DatabaseOperations {
 
@@ -33,7 +36,33 @@ public class DatabaseOperations {
     	this.username = username;
     	this.password = password;
     }
-    
+    public void getData(LatLong p1, LatLong p2) throws SQLException
+	{
+    	con = DriverManager.getConnection(url, username, password);
+    	BoundingBox x = new BoundingBox(20);
+    	x.getBoundingBox(p1, p2);
+    	LatLong min = x.getMin();
+    	LatLong max = x.getMax();
+    	
+    	String sql = "select distinct Latitude, Longitude, UVA1, UVA2, UVB1, UVB2 " +
+    				"from uvReadings where Time > '2012-10-22' " +
+    				"and UVB1 > 7.289 and Latitude > ?  and Longitude > ? " +
+    				"and Latitude < ? and Longitude < ?";
+    	PreparedStatement p = con.prepareStatement(sql);
+    	p.setDouble(1, min.getLatitude());
+    	p.setDouble(2, min.getLongitude());
+    	p.setDouble(3,max.getLatitude());
+    	p.setDouble(4, max.getLongitude());
+    	ResultSet rs = p.executeQuery();
+    	
+    	while(rs.next())
+    	{
+    		System.out.println("\t"+rs.getString(1)+","+rs.getString(2)+","+rs.getString("UVA1")+","+rs.getString("UVB1"));
+    	}
+    	rs.close();
+    	con.close();
+		
+	}
     
 	@SuppressWarnings("deprecation")
 	public int insertIntoDatabase(String filename) throws IOException, SQLException, ParseException

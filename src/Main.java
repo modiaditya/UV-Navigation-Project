@@ -1,15 +1,17 @@
 import java.net.SocketTimeoutException;
 
+import me.navigation.database.DatabaseOperations;
 import me.navigation.server.API_Parser;
 import me.navigation.server.BoundingBox;
 import me.navigation.server.HttpSender;
 import me.navigation.shared.LatLong;
 import me.navigation.shared.Routes;
+import me.navigation.shared.UVData;
 
 
 public class Main {
 
-	public static void main(String args[]) throws SocketTimeoutException
+	public static void main(String args[]) throws Exception
 	{
 		
 		
@@ -50,9 +52,26 @@ public class Main {
 		allRoutes[index].setGoogleAPIJson(API_Parser.getRouteInformation(googleMapsResult, index));
 		allRoutes[index].initialize();
 		System.out.println(allRoutes[0]);
+		
+		//databse related
+		String url = "jdbc:mysql://localhost:3306/project";
+        String username = "adityauv";
+        String password = "uvnavigation";
+		DatabaseOperations o = new DatabaseOperations(url, username, password);
+		// database related ends
+		
 		for(int i=0;i<allRoutes[index].getSteps().length;i++)
 		{
 			System.out.println(allRoutes[index].getSteps()[i]);
+			UVData[] d = allRoutes[index].getSteps()[i].getPoints();
+			
+			for(int j=0;j<d.length-1;j++)
+			{
+				System.out.println(d[j].getPoint());
+				o.getData(d[j].getPoint(), d[j+1].getPoint());
+				System.out.println(d[j+1].getPoint());
+			}
+			
 		}
 		
 	}

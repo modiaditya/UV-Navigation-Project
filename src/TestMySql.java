@@ -16,6 +16,8 @@ import me.navigation.database.DatabaseOperations;
  */
 public class TestMySql {
 	
+	
+	
 	static void normalSql(String url, String username, String password)
 	{
 		Connection con = null;

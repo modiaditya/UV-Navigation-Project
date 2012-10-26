@@ -27,7 +27,7 @@ public class Routes {
 	private int no_of_segments;
 	private Routes[] steps;
 	private boolean isChild = false;
-	
+	private UVData[] points;
 	
 	/**
 	 * 
@@ -35,7 +35,7 @@ public class Routes {
 	 * @throws SocketTimeoutException 
 	 * 
 	 */
-	public void initialize() throws SocketTimeoutException
+	public void initialize() throws Exception
 	{
 		JsonElement jElement = new JsonParser().parse(googleAPIJson);
 		JsonObject jObject = jElement.getAsJsonObject();
@@ -54,7 +54,7 @@ public class Routes {
 		}
 	}
 	
-	public void initializeChild() throws SocketTimeoutException
+	public void initializeChild() throws Exception
 	{
 		JsonElement jElement = new JsonParser().parse(googleAPIJson);
 		JsonObject jObject = jElement.getAsJsonObject();
@@ -75,6 +75,8 @@ public class Routes {
 			steps[i].end_location = new LatLong(Double.parseDouble(jObjectStep.getAsJsonObject("end_location").get("lat").toString()), Double.parseDouble(jObjectStep.getAsJsonObject("end_location").get("lng").toString()));
 			steps[i].summary = jObjectStep.get("html_instructions").toString(); 
 			steps[i].setNo_of_segments();
+			//steps[i].points= new UVData[steps[i].getNo_of_segments()];
+			steps[i].setPoints();
 			
 		}
 		
@@ -95,6 +97,42 @@ public class Routes {
 		
 		JsonElement jElement = new JsonParser().parse(jsonLine);
 		this.no_of_segments = jElement.getAsJsonObject().getAsJsonArray("coordinates").size();
+		
+		
+	}
+	
+	/**
+	 * This function is used to set all the coordinates between two points 
+	 * @throws Exception
+	 *
+	 */
+	public void setPoints() throws Exception
+	{
+		String endpoint = "http://www.yournavigation.org/api/1.0/gosmore.php";
+		String parameters = "format=geojson&flat="+this.getStart_location().getLatitude()+"&flon="+this.getStart_location().getLongitude()+"&tlat="+this.getEnd_location().getLatitude()+"&tlon="+this.getEnd_location().getLongitude()+"&v=foot";
+		
+		String jsonLine = HttpSender.sendGetRequest(endpoint, parameters);
+		
+		JsonElement jElement = new JsonParser().parse(jsonLine);
+		JsonArray jArray = jElement.getAsJsonObject().getAsJsonArray("coordinates");
+		this.points = new UVData[jArray.size()];
+		String one ;
+		String[] sp;
+		LatLong j;
+		for(int i=0;i<jArray.size();i++)
+		{
+			points[i] = new UVData();
+			j= new LatLong();
+			one = jArray.get(i).toString();
+			one = one.replace('[', ' ');
+			one = one.replace(']', ' ');
+			sp = one.trim().split(",");
+			j.setLatitude(Double.parseDouble(sp[1]));
+			j.setLongitude(Double.parseDouble(sp[0]));
+			points[i].setPoint(j);
+			one ="";
+		}
+		
 		
 	}
 	public String toString()
@@ -197,6 +235,14 @@ public class Routes {
 
 	public void setChild(boolean isChild) {
 		this.isChild = isChild;
+	}
+
+	public UVData[] getPoints() {
+		return points;
+	}
+
+	public void setPoints(UVData[] points) {
+		this.points = points;
 	}
 
 }
